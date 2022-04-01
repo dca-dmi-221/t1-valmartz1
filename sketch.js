@@ -1,10 +1,13 @@
 let imgPrincipal;
-let actualScreen = 0;
+let actualScreen = 1;
 let imgScreenTwo;
 let imgPlay;
 let imgPause;
 let imgNext;
 let imgBack;
+
+let sliderSong;
+let sliderVolume;
 
 
 function setup() {
@@ -16,6 +19,14 @@ function setup() {
   imgNext = loadImage('images/Next.png')
   imgBack = loadImage('images/Back.png')
   
+  sliderSong = createSlider(0,100,10,1);
+  sliderSong.position(60,703);
+  sliderSong.style("width","1160px");
+  sliderSong.hide();
+
+  sliderVolume = createSlider(0,100,10,1);
+  sliderVolume.position(1060,750);
+  console.log(sliderSong)
 }
 
 function draw() {
@@ -30,7 +41,7 @@ function draw() {
 
 
 function mainTitle(){
-  image(imgPrincipal, 0, 0)
+  image(imgPrincipal, 0, 0);
 }
 
 function mousePressed(){
@@ -41,8 +52,17 @@ function mousePressed(){
 }
 
 function currentSong() {
+  sliderSong.show();
   image(imgScreenTwo, 0, 0)
-  image(imgBack, 630, 700);
-  image(imgNext, 650, 700);
-  image(imgPause, 640, 700);
+  imgBack.resize(70,70)
+  imgNext.resize(70,70)
+  imgPause.resize(70,70)
+  image(imgBack, 580, 720);
+  image(imgNext, 700, 720);
+  image(imgPause, 640, 720);
+
+  textSize(50);
+  fill(255);
+  text("Cancion", 200, 770);
+
 }
