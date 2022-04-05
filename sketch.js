@@ -91,6 +91,7 @@ function draw() {
     }
   }else{
     textSize(100);
+    textFont("Poppins", 25);
     text('LOADING SONGS\nPLEASE WAIT',300,300);
   }
 }
