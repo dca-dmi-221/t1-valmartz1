@@ -44,6 +44,8 @@ class Mp3{
         this.isSounding = is;
     }
 
+// PAUSE AND PLAY
+
     playpause(){
         if(this.isSounding){
             this.songList[this.sounding].play();
@@ -54,9 +56,13 @@ class Mp3{
         }
     }
 
+// STOP SONG
+
     stopSong(){
         this.songList[this.sounding].stop();
     }
+
+// NEXT SONG
 
     nextSong(){
         if(this.sounding == this.songList.length-1){
@@ -65,6 +71,8 @@ class Mp3{
             this.sounding++;
         }
     }
+
+// PREVIOUS SONG
 
     previousSong(){
         if(this.sounding == 0){
@@ -85,6 +93,8 @@ class Mp3{
     addPlaylist(plist){
         this.playlist.push(plist);
     }
+
+// VOLUME ADJUSTMENT
 
     adjustVolume(value){
         this.songList[this.sounding].setVolume(value/100)

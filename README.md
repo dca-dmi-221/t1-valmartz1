@@ -1,4 +1,4 @@
 Taller 1 - Reproductor MP3
 
-MUZI por Valeria Martinez
+MUZ por Valeria Martinez
 A0372453
