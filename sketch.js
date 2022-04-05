@@ -23,6 +23,7 @@ function setup() {
   imgNext = loadImage('images/Next.png')
   imgBack = loadImage('images/Back.png')
   
+  
 // TRACK TRACE SLIDER
 
   sliderSong = createSlider(0,100,10,1);
@@ -84,9 +85,9 @@ function draw() {
     }else if(actualScreen == 1){
       currentSong();
       if(mp3.getIsSounding() == true){
-        fill(178,34,34);
-        textSize(45)
-        text('▶',663,770);
+        imgPlay.resize(70,70)
+        image(imgPlay, 640, 720);
+        
       }
     }
   }else{
