@@ -23,14 +23,20 @@ function setup() {
   imgNext = loadImage('images/Next.png')
   imgBack = loadImage('images/Back.png')
   
+// TRACK TRACE SLIDER
+
   sliderSong = createSlider(0,100,10,1);
   sliderSong.position(60,703);
   sliderSong.style("width","1160px");
   sliderSong.hide();
 
+// VOLUME SLIDER
+
   sliderVolume = createSlider(0,100,10,1);
   sliderVolume.position(1060,750);
   sliderVolume.hide();
+
+// SONGS 
 
   let song1 = loadSound('music/Be Prepared.mp3');
   let song2 = loadSound('music/Can You Feel The Love Tonight.mp3');
@@ -85,7 +91,7 @@ function draw() {
     }
   }else{
     textSize(100);
-    text('LOADING SONGS\nPLEASE WAIT',200,300);
+    text('LOADING SONGS\nPLEASE WAIT',300,300);
   }
 }
 
