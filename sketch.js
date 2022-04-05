@@ -78,7 +78,10 @@ function waitToLoad(){
 
 function draw() {
   background(220);
- 
+
+
+// PAUSE AND PLAY BUTTON
+
   if(waitToLoad()){
     if(actualScreen == 0){
       mainTitle();
