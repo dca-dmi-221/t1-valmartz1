@@ -5,7 +5,7 @@ class Mp3{
         this.playlist = [];
         this.nameList = [];
         this.currentPlaylist = 0;
-        this.isSounding = false;
+        this.isSounding = true;
     }
 
     getIsSounding(){
@@ -49,10 +49,10 @@ class Mp3{
     playpause(){
         if(this.isSounding){
             this.songList[this.sounding].play();
-            this.isSounding = false;
+            // this.isSounding = false;
         }else{
             this.songList[this.sounding].pause();
-            this.isSounding = true;
+            // this.isSounding = true;
         }
     }
 
@@ -98,5 +98,27 @@ class Mp3{
 
     adjustVolume(value){
         this.songList[this.sounding].setVolume(value/100)
+    }
+
+//CONVERT FROM ONLY SECONDS TO MINUTES:SECONDS
+
+    convertDuration(duration){
+        let min = Math.floor(duration / 60);
+        let sec = (duration - (min * 60))+'';
+
+        let array = sec.split('');
+        let secs = '';
+        for(let i in array){
+            if(array[i] == '.'){
+                break;
+            }else{
+                if(sec<10 ){
+                    secs+='0';
+                }
+                secs+=array[i];
+            }
+        }
+
+       return ( min+':'+secs);
     }
 }

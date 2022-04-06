@@ -1,5 +1,5 @@
 let imgPrincipal;
-let actualScreen = 1;
+let actualScreen = 0;
 let imgScreenTwo;
 let imgPlay;
 let imgPause;
@@ -17,11 +17,15 @@ function setup() {
   createCanvas(1280, 800);
   mp3 = new Mp3();
   imgPrincipal = loadImage('images/Principal.png')
-  imgScreenTwo = loadImage('images/FrameTwo.png')
+  imgScreenTwo = loadImage('images/SecondScreen.png')
   imgPlay = loadImage('images/Play.png')
   imgPause = loadImage('images/Pause.png')
   imgNext = loadImage('images/Next.png')
   imgBack = loadImage('images/Back.png')
+  
+
+  input = createFileInput(addNewSong);
+  input.position(740, 635);
   
   
 // TRACK TRACE SLIDER
@@ -79,18 +83,24 @@ function waitToLoad(){
 function draw() {
   background(220);
 
-
 // PAUSE AND PLAY BUTTON
-
+ 
   if(waitToLoad()){
     if(actualScreen == 0){
+      input.show();
       mainTitle();
     }else if(actualScreen == 1){
+      input.hide();
       currentSong();
-      if(mp3.getIsSounding() == true){
+      console.log(mp3.getIsSounding())
+      if(mp3.getIsSounding() == false){
+        imgPause.resize(70,70)
+        image(imgPause, 640, 720);
+        // mp3.setIsSounding(true);
+      }else{
         imgPlay.resize(70,70)
         image(imgPlay, 640, 720);
-        
+        // mp3.setIsSounding(false);
       }
     }
   }else{
@@ -105,10 +115,23 @@ function mainTitle(){
   image(imgPrincipal, 0, 0);
 }
 
+function addNewSong(file){
+  if (file.type === 'audio') {
+    let sound = loadSound(file);
+    mp3.addName(file.name);
+    mp3.addSong(sound);
+  }
+}
+
 function mousePressed(){
-//  console.log(mouseX + ',' + mouseY);
-  if (mouseX > 276 && mouseX < 598 && mouseY > 585 && mouseY < 655 && actualScreen == 0){
-   actualScreen = 1;
+ console.log(mouseX + ',' + mouseY);
+  if(actualScreen == 0){
+    if (mouseX > 276 && mouseX < 598 && mouseY > 585 && mouseY < 655 ){
+      actualScreen = 1;
+    }
+    if(mouseX > 665 && mouseX < 1000 && mouseY > 590 && mouseY < 650){
+
+    }
   }else if(actualScreen == 1){
     if(mouseX > 590 && mouseX < 635 && mouseY > 730 && mouseY < 770){
       console.log('back');
@@ -119,6 +142,11 @@ function mousePressed(){
     }
     if(mouseX > 650 && mouseX < 695 && mouseY > 730 && mouseY < 770){
       mp3.playpause();
+      if(mp3.getIsSounding() == false){
+        mp3.setIsSounding(true);
+      }else{
+        mp3.setIsSounding(false);
+      }
     }
     if(mouseX > 710 && mouseX < 755 && mouseY > 730 && mouseY < 770){
       console.log('next');
@@ -136,10 +164,15 @@ function currentSong() {
   image(imgScreenTwo, 0, 0)
   imgBack.resize(70,70)
   imgNext.resize(70,70)
-  imgPause.resize(70,70)
+  
   image(imgBack, 580, 720);
   image(imgNext, 700, 720);
-  image(imgPause, 640, 720);
+  
+
+  text('Duration: '+mp3.convertDuration(mp3.getSongList()[mp3.getSounding()].duration()), 840,765);
+
+  sliderSong.attribute('max',mp3.getSongList()[mp3.getSounding()].duration());
+  sliderSong.value(mp3.getSongList()[mp3.getSounding()].currentTime());
 
   textSize(30);
   fill(255);
